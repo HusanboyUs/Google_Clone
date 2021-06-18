@@ -22,28 +22,27 @@
     <div class="logo">
     <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" />
     </div>
-    <form method="POST" action="search">
+    <form method="POST" action="{% url 'result'%}">
     {% csrf_token %}
-    <input class="search-bar" type="text" name="search" autofocus x-webkit-speech/>
-    <div class="search-nav">
-    <div class="search-button">
-    <a href="#"><button type="submit">Google Search</button></a>
+        <input class="search-bar" type="text" name="search" autofocus x-webkit-speech/>
+        <div class="search-nav">
+        <div class="search-button">
+        <a href="#"><button type="submit">Google Search</button></a>
     </form>
     <a href="#"><button>I'm Feeling Lucky</button></a>
     </div>
     </div>
     </div>
-
-
-    <b style="padding-left: 50px; padding-right: 50px; color: #646464;">Web Results</b>
-
-    <div style="padding-left: 50px; padding-right: 50px;">
-        <h3 style="color: blue;"><a href="{{ result.1 }}"></a></h3>
-        <h3 style="color: green;"></h3>
-        <h3></h3>
-    </div><br><br>
-   
-
+    {%if final_result%}
+        <b style="padding-left: 50px; padding-right: 50px; color: #646464;">Web Results</b>
+        {%for result in final_result%}
+        <div style="padding-left: 50px; padding-right: 50px;">
+            <h3 style="color: blue;"><a href="{{results.1}}">{{result.0}}</a></h3>
+            <h3 style="color: green;">{{results.1}}</h3>
+            <h3>{{result.2}}</h3>
+        </div><br><br>
+        {%endfor%}
+    {%endif%}
     <div class="footer">
     <footer class="bottom-toolbar">
     <nav class="footer-left">
